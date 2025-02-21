@@ -21,6 +21,26 @@
                 return $num1 / $num2;        
            }
         }
+        public function getProduct(){
+            $query = "SELECT * FROM producto";
+            $result = mysqli_query($this->db, $query);
+            while($row = mysqli_fetch_assoc($result))
+            {
+                return $row['nombre'];
+            }
+            $result->close();
+        }
+
+        public function validarUsuario($usuario, $clave){
+            $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND '$clave' = clave  ";
+            $result = mysqli_query($this->db, $query); 
+            if (mysqli_num_rows($result) > 0) {
+                return "Los datos ingresados son válidos";
+            } else {
+                return "Los datos ingresados no coinciden, intente de nuevo";
+            }
+        }
+
     }
     
     // Crear un nuevo servidor SOAP
